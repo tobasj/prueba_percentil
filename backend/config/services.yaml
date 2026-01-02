@@ -1,6 +1,21 @@
 parameters:
 
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    # Autoregistro de clases, antes de las definiciones explícitas para que estas últimas prevalezcan
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Domain/'
+            - '../src/Application/Valuation/'
+
     App\Infrastructure\Persistence\InMemoryBrandFactorRepository: ~
 
     App\Domain\Valuation\Rule\BrandRule:
@@ -26,22 +41,24 @@ services:
 
     App\UI\Http\Validation\ValuationRequestValidator: ~
 
+    # Evitar autowire de DTOs con escalares requeridos
+    App\Application\Valuation\ValuationRequest:
+        autowire: false
+        autoconfigure: false
+        public: false
+        arguments: ['', '', 'fair']
+
+    App\Application\Valuation\ValuationResponse:
+        autowire: false
+        autoconfigure: false
+        public: false
+        arguments: [0, 0, 0, 0, []]
+
     App\UI\Http\ValuationController:
         arguments:
             $handler: '@App\Application\Valuation\EstimateValuationHandler'
             $validator: '@App\UI\Http\Validation\ValuationRequestValidator'
         tags: ['controller.service_arguments']
-
-    _defaults:
-        autowire: true
-        autoconfigure: true
-
-    App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
 
     App\Controller\:
         resource: '../src/Controller/'

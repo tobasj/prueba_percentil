@@ -37,6 +37,15 @@ final class Estimate
         $min = $price * (1 - $spread);
         $max = $price * (1 + $spread);
 
-        return new ValuationResult($this->base, $price, $min, $max, $this->adjustments);
+        // Redondeamos a 2 decimales para presentación
+        $round = fn(float $v): float => round($v, 2);
+
+        return new ValuationResult(
+            $round($this->base),
+            $round($price),
+            $round($min),
+            $round($max),
+            $this->adjustments
+        );
     }
 }

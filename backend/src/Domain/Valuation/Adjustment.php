@@ -9,7 +9,12 @@ final class Adjustment
     private string $type;
     private float $value;
 
-    private function __construct(string $rule, string $type, float $value) {}
+    private function __construct(string $rule, string $type, float $value)
+    {
+        $this->rule = $rule;
+        $this->type = $type;
+        $this->value = $value;
+    }
 
     public static function multiplier(string $rule, float $value): self { return new self($rule, 'multiplier', $value); }
     public static function bonus(string $rule, float $value): self { return new self($rule, 'bonus', $value); }
