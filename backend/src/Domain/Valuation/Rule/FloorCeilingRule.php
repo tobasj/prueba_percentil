@@ -10,7 +10,10 @@ final class FloorCeilingRule implements RuleInterface
 {
     private float $floor;
     private float $ceiling;
-    public function __construct(float $floor, float $ceiling) {}
+    public function __construct(float $floor, float $ceiling) {
+        $this->floor = $floor;
+        $this->ceiling = $ceiling;
+    }
 
     public function applies(ValuationInput $input): bool
     {

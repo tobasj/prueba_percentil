@@ -8,8 +8,11 @@ final class Estimate
     private float $factor = 1.0;
     /** @var Adjustment[] */
     private array $adjustments = [];
+    private float $base;
 
-    public function __construct(float $base) {}
+    public function __construct(float $base) {
+        $this->base = $base;
+    }
 
     public function addMultiplier(string $rule, float $value): void
     {

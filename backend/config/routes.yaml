@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+valuation_estimate:
+  path: /api/v1/valuation/estimate
+  controller: App\UI\Http\ValuationController::estimate
+  methods: [POST]

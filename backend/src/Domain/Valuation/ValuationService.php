@@ -13,6 +13,7 @@ final class ValuationService
     public function __construct(iterable $rules, float $base = 100.0)
     {
         $this->rules = is_array($rules) ? $rules : iterator_to_array($rules);
+        $this->base = $base;
     }
 
     public function estimate(ValuationInput $input): ValuationResult

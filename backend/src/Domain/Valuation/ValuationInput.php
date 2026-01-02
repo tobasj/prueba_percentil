@@ -11,9 +11,9 @@ final class ValuationInput
 
     public function __construct(string $brand, string $category, string $condition
     ) {
-        $this->brand = trim($this->brand);
-        $this->category = trim($this->category);
-        $this->condition = trim($this->condition);
+        $this->brand = trim($brand);
+        $this->category = trim($category);
+        $this->condition = trim($condition);
     }
 
     public function brand(): string { return $this->brand; }

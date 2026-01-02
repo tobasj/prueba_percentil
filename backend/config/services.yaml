@@ -6,6 +6,31 @@
 parameters:
 
 services:
+    App\Infrastructure\Persistence\InMemoryBrandFactorRepository: ~
+
+    App\Domain\Valuation\Rule\BrandRule:
+        arguments: ['@App\Infrastructure\Persistence\InMemoryBrandFactorRepository']
+        tags: ['valuation.rule']
+
+    App\Domain\Valuation\Rule\ConditionRule:
+        tags: ['valuation.rule']
+
+    App\Domain\Valuation\Rule\CategoryRule:
+        tags: ['valuation.rule']
+
+    App\Domain\Valuation\Rule\FloorCeilingRule:
+        arguments: [10, 500]
+        tags: ['valuation.rule']
+
+    App\Domain\Valuation\ValuationService:
+        arguments:
+            $rules: !tagged_iterator valuation.rule
+            $base: 100
+
+    App\Application\Valuation\EstimateValuationHandler: ~
+
+    App\UI\Http\ValuationController:
+        tags: ['controller.service_arguments']
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
