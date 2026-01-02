@@ -1,0 +1,10 @@
+/vendor/
+/var/
+/node_modules/
+/public/build/
+/public/dist/
+/.env
+/.idea/
+/.vscode/
+npm-debug.log*
+yarn-debug.log*
