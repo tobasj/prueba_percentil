@@ -9,7 +9,15 @@ use App\Infrastructure\Persistence\BrandFactorRepository;
 
 final class BrandRule implements RuleInterface
 {
-    public function __construct(BrandFactorRepository $repo) {}
+    private BrandFactorRepository $repo;
+
+    /**
+     * @param BrandFactorRepository $repo
+     */
+    public function __construct(BrandFactorRepository $repo) 
+    {
+        $this->repo = $repo;
+    }
 
     public function applies(ValuationInput $input): bool
     {
